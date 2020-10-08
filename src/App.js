@@ -1,25 +1,53 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+
+import { Grommet, Box, Anchor, Button } from 'grommet';
+import myTheme from './myTheme';
+
+import NavBar from './components/NavBar';
+import ItemTabs from './components/Item/ItemTabs';
+import OrderSidebar from './components/Order/OrderSidebar';
+import YourOrderButton from './components/Order/YourOrderButton';
 
 function App() {
+  const [showSidebar, setShowSidebar] = useState(false);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Grommet theme={myTheme} themeMode='dark' full>
+      <ResponsiveContext.Consumer>
+      <Box fill>
+        <NavBar>
+          <Anchor>
+            <Button plain color='white' label='Home' />
+          </Anchor>
+          <Anchor>
+            <Button plain color='white' label='About' />
+          </Anchor>
+          <Anchor>
+            <Button plain color='white' label='Sign In' />
+          </Anchor>
+          <Anchor>
+            <Button primary color='white' label='Sign Up' />
+          </Anchor>
+        </NavBar>
+        <Box direction='row' flex overflow={{ horizontal: 'hidden' }}>
+          <Box
+            flex='grow'
+            background='#eee'
+            overflow={{ horizontal: 'hidden' }}
+          >
+            <ItemTabs />
+            <YourOrderButton
+              margin-left='small'
+              orderCount='3'
+              setShowSidebar={setShowSidebar}
+              showSidebar={showSidebar}
+            />
+          </Box>
+
+          <OrderSidebar showSidebar={showSidebar} />
+        </Box>
+      </Box>
+    </Grommet>
   );
 }
 
