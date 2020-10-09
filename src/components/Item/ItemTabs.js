@@ -4,28 +4,26 @@ import { Box, Tab, Tabs } from 'grommet';
 import ItemGrid from './ItemGrid';
 import YourOrderButton from '../Order/YourOrderButton';
 
-const ItemTabs = () => (
+const ItemTabs = ({orderCount, showSidebar ,setShowSidebar}) => (
   <Tabs>
     <Tab title='Rice'>
-      <Box direction='row' fill flex pad='large'>
-        <ItemGrid />
-      </Box>
+        <ItemGrid type='rice' />
     </Tab>
     <Tab title='Noodles'>
-      <Box fill pad='large'>
-        <ItemGrid />
-      </Box>
+        <ItemGrid type='noodle'/>
     </Tab>
     <Tab title='Soups'>
-      <Box fill pad='large'>
-        <ItemGrid />
-      </Box>
+        <ItemGrid type='soup'/>
     </Tab>
     <Tab title='Drinks'>
-      <Box fill pad='large'>
-        <ItemGrid />
-      </Box>
+        <ItemGrid type='drink'/>
     </Tab>
+    <YourOrderButton
+              margin-left='small'
+              orderCount={orderCount}
+              setShowSidebar={setShowSidebar}
+              showSidebar={showSidebar}
+            />
   </Tabs>
 );
 

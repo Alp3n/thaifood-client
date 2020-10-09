@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, Collapsible, Text } from 'grommet';
 
-const OrderSidebar = (props, { showSidebar }) => {
+const OrderSidebar = ({ showSidebar }) => {
   return (
     <Collapsible direction='horizontal' open={showSidebar}>
       <Box

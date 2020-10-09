@@ -1,19 +1,18 @@
 import React, { useState } from 'react';
 
-import { Grommet, Box, Anchor, Button } from 'grommet';
+import { Grommet, Box, Anchor, Button, ResponsiveContext } from 'grommet';
 import myTheme from './myTheme';
 
 import NavBar from './components/NavBar';
 import ItemTabs from './components/Item/ItemTabs';
 import OrderSidebar from './components/Order/OrderSidebar';
-import YourOrderButton from './components/Order/YourOrderButton';
 
 function App() {
   const [showSidebar, setShowSidebar] = useState(false);
+  const [orderCount, setOrderCount] = useState();
 
   return (
     <Grommet theme={myTheme} themeMode='dark' full>
-      <ResponsiveContext.Consumer>
       <Box fill>
         <NavBar>
           <Anchor>
@@ -35,15 +34,11 @@ function App() {
             background='#eee'
             overflow={{ horizontal: 'hidden' }}
           >
-            <ItemTabs />
-            <YourOrderButton
-              margin-left='small'
-              orderCount='3'
+            <ItemTabs
+              orderCount={orderCount}
               setShowSidebar={setShowSidebar}
-              showSidebar={showSidebar}
-            />
+              showSidebar={showSidebar}/>
           </Box>
-
           <OrderSidebar showSidebar={showSidebar} />
         </Box>
       </Box>

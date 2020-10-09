@@ -4,18 +4,24 @@ import ItemCard from './ItemCard';
 
 import data from '../../data';
 
-const ItemGrid = () => (
-  <Box fill flex pad='medium' align='justify'>
+
+
+const ItemGrid = ({type}) => {
+
+  const filteredData = data.filter(item => item.type === `${type}` )
+
+  return (
+  <Box fill flex pad='large' align='justify'>
     <Grid
-      gap='large'
+      gap='xlarge'
       rows='medium'
       columns={{ count: 'fit', size: ['medium', 'medium'] }}
     >
-      <InfiniteScroll items={data}>
+      <InfiniteScroll items={filteredData}>
         {(item) => ItemCard({ item })}
       </InfiniteScroll>
     </Grid>
   </Box>
 );
-
+}
 export default ItemGrid;
