@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import Axios from 'axios';
-import useAxios from 'axios-hooks';
 import { Box, Grid, InfiniteScroll } from 'grommet';
 import ItemCard from './ItemCard';
 import ItemForm from './ItemForm';
@@ -11,7 +10,6 @@ const ItemGrid = ({ type, getValueFromForm }) => {
   const url = 'http://localhost:9000/items';
 
   const [items, setItems] = useState([]);
-  // const [{ data: loading, error }, refetch] = useAxios(url);
 
   useEffect(() => {
     fetchData();
@@ -26,15 +24,6 @@ const ItemGrid = ({ type, getValueFromForm }) => {
       console.error(err);
     }
   };
-
-  // setAllItems(data.items);
-  // };
-
-  // Axios.get(url).then((resp) => {
-  //   useEffect(() => {
-  //     setAllItems(resp.data.items);
-  //   });
-  // });
 
   const filteredData = items.filter((item) => item.type === `${type}`);
 
