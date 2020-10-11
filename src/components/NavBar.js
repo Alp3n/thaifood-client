@@ -1,8 +1,10 @@
 import React from 'react';
-import { Anchor, Box, Button, Heading, Nav, Text } from 'grommet';
+import { Box, Button, Nav, Text } from 'grommet';
+import { Cafeteria } from 'grommet-icons';
+import { Link } from 'react-router-dom';
 
 const NavBar = (props) => (
-  <Box
+  <Nav
     tag='header'
     direction='row'
     align='center'
@@ -11,11 +13,31 @@ const NavBar = (props) => (
     pad={{ left: 'medium', right: 'small', vertical: 'small' }}
     style={{ zIndex: '1' }}
   >
-    <Heading level='3' margin='none' size='small'>
-      ThaiFooood
-    </Heading>
-    <Nav direction='row' align='center' {...props} />
-  </Box>
+    <Box>
+      <Link to='/'>
+        <Button plain icon={<Cafeteria />} color='white' label='ThaiFood' />
+      </Link>
+    </Box>
+    <Box
+      direction='row'
+      align='center'
+      gap='medium'
+      margin={{ right: 'medium' }}
+    >
+      <Link to='/'>
+        <Button plain color='white' label='Home' />
+      </Link>
+      <Link to='/about'>
+        <Button plain color='white' label='About' />
+      </Link>
+      <Link to='/signin'>
+        <Button primary color='white' label='Sign In' />
+      </Link>
+      <Link to='/signup'>
+        <Button plain color='white' label='Sign Up' />
+      </Link>
+    </Box>
+  </Nav>
 );
 
 export default NavBar;

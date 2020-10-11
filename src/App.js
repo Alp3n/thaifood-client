@@ -1,47 +1,26 @@
-import React, { useState } from 'react';
+import React from 'react';
 
-import { Grommet, Box, Anchor, Button, ResponsiveContext } from 'grommet';
+import { Grommet } from 'grommet';
 import myTheme from './myTheme';
 
-import NavBar from './components/NavBar';
-import ItemTabs from './components/Item/ItemTabs';
-import OrderSidebar from './components/Order/OrderSidebar';
+import { Switch, Route } from 'react-router-dom';
+
+import Home from './pages/Home';
+import About from './pages/About';
+import SignIn from './pages/SignIn';
+import SignUp from './pages/SignUp';
+import Admin from './pages/Admin';
 
 function App() {
-  const [showSidebar, setShowSidebar] = useState(false);
-  const [orderCount, setOrderCount] = useState();
-
   return (
     <Grommet theme={myTheme} themeMode='dark' full>
-      <Box fill>
-        <NavBar>
-          <Anchor>
-            <Button plain color='white' label='Home' />
-          </Anchor>
-          <Anchor>
-            <Button plain color='white' label='About' />
-          </Anchor>
-          <Anchor>
-            <Button plain color='white' label='Sign In' />
-          </Anchor>
-          <Anchor>
-            <Button primary color='white' label='Sign Up' />
-          </Anchor>
-        </NavBar>
-        <Box direction='row' flex overflow={{ horizontal: 'hidden' }}>
-          <Box
-            flex='grow'
-            background='#eee'
-            overflow={{ horizontal: 'hidden' }}
-          >
-            <ItemTabs
-              orderCount={orderCount}
-              setShowSidebar={setShowSidebar}
-              showSidebar={showSidebar}/>
-          </Box>
-          <OrderSidebar showSidebar={showSidebar} />
-        </Box>
-      </Box>
+      <Switch>
+        <Route path='/' component={Home} exact />
+        <Route path='/about' component={About} />
+        <Route path='/signin' component={SignIn} />
+        <Route path='/signup' component={SignUp} />
+        <Route path='/admin' component={Admin} />
+      </Switch>
     </Grommet>
   );
 }

@@ -5,7 +5,7 @@ const myTheme = {
     colors: {
       brand: '#3b5249',
       'accent-1': '#ff7e67',
-      focus: '#ff7e67',
+      focus: 'accent-4',
       'accent-2': '#519872',
       'accent-3': '#a4b494',
     },
