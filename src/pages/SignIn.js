@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { Box, Text } from 'grommet';
-import NavBar from '../components/NavBar';
-import SignBox from '../components/Sign/SignBox';
+import NavBar from '../components/nav/NavBar';
+import SignBox from '../components/sign/SignBox';
 import AuthService from '../services/auth.service';
 
 //TODO JWT AUTH

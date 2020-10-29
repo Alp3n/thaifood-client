@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import {
   Box,
   Card,
@@ -8,32 +8,46 @@ import {
   Image,
   Stack,
   Text,
+  ResponsiveContext,
 } from 'grommet';
 
 const ItemCard = ({ item, onOpen }) => {
+  const handleAllergens = (item) => {
+    if (item.allergens[0] !== null) {
+      return item.allergens.join(', ');
+    } else {
+      return 'None';
+    }
+  };
+
+  const size = useContext(ResponsiveContext);
   return (
     <Card
       key={item._id}
-      height='medium'
-      width='medium'
       onClick={() => onOpen(item._id)}
-      round='xsmall'
+      round='small'
+      elevation='small'
     >
       <Stack anchor='bottom-left'>
-        <CardBody height='medium'>
+        <CardBody height={size !== 'small' ? 'medium' : 'small'} width='medium'>
           <Image fit='cover' src={item.image} />
         </CardBody>
         <CardHeader
-          pad={{ horizontal: 'small', vertical: 'small' }}
+          pad='small'
           background='#3b5249c4'
           width='medium'
-          justify='start'
+          align='center'
         >
-          <Box>
-            <Heading level='3' margin='none'>
-              {item.names.en}
-            </Heading>
-            <Text size='small'>Allergens: {item.allergens.join(', ')}</Text>
+          <Box direction='column'>
+            <Box direction='row' gap='small' align='center'>
+              <Heading level='3' margin='none'>
+                {item.names.en}
+              </Heading>
+              <Text size='small'>{item.names.pron}</Text>
+            </Box>
+            <Box>
+              <Text size='small'>Allergens: {handleAllergens(item)}</Text>
+            </Box>
           </Box>
         </CardHeader>
       </Stack>

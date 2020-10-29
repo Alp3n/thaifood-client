@@ -1,18 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import Axios from 'axios';
-import { Box, Grid, InfiniteScroll } from 'grommet';
+import { Box, Grid, InfiniteScroll, ResponsiveContext } from 'grommet';
 import ItemCard from './ItemCard';
 import ItemForm from './ItemForm';
 
-// import data from '../../data';
-
-const ItemGrid = ({ type, getValueFromForm }) => {
+const ItemGrid = ({ type }) => {
   const url = 'http://localhost:9000/items';
 
   const [items, setItems] = useState([]);
 
   useEffect(() => {
     fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const fetchData = async () => {
@@ -20,6 +19,7 @@ const ItemGrid = ({ type, getValueFromForm }) => {
       const response = await Axios.get(url);
       const newData = response.data.items;
       setItems(...items, newData);
+      console.log(items);
     } catch (err) {
       console.error(err);
     }
@@ -40,24 +40,29 @@ const ItemGrid = ({ type, getValueFromForm }) => {
 
   // const selectedItem = filteredData.filter((item) => item._id === selectedId);
   const selectedItem = filteredData.find((item) => item._id === selectedId);
+  const size = useContext(ResponsiveContext);
 
   return (
-    <Box fill pad='large'>
+    <Box
+      fill
+      overflow='auto'
+      // margin={size === 'small' ? { bottom: 'xlarge' } : undefined}
+    >
       <Grid
-        gap='xlarge'
-        rows='medium'
-        columns={{ count: 'fit', size: ['medium', 'medium'] }}
+        justifyContent={size === 'small' ? 'center' : 'between'}
+        gap={size !== 'small' ? 'medium' : 'small'}
+        rows={size !== 'small' ? 'medium' : 'small'}
+        columns={{ count: 'fill', size: ['small', 'medium'] }}
+        pad='large'
+        margin={
+          size === 'small' ? { top: 'none', bottom: 'xlarge' } : undefined
+        }
       >
         <InfiniteScroll items={filteredData}>
           {(item) => ItemCard({ item, onOpen })}
         </InfiniteScroll>
       </Grid>
-      <ItemForm
-        item={selectedItem}
-        open={open}
-        onClose={onClose}
-        getValueFromForm={getValueFromForm}
-      />
+      <ItemForm item={selectedItem} open={open} onClose={onClose} />
     </Box>
   );
 };

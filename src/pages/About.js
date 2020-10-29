@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box, Text } from 'grommet';
-import NavBar from '../components/NavBar';
+import NavBar from '../components/nav/NavBar';
 const About = () => {
   return (
     <Box fill>

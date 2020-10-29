@@ -28,10 +28,10 @@ const ItemForm = ({ item, open, onClose, getValueFromForm }) => {
 
   let customValue = {};
 
-  const onCloseReset = () => {
-    onClose();
-    getValueFromForm(customValue);
-  };
+  // const onCloseReset = () => {
+  //   onClose();
+  //   // getValueFromForm(customValue);
+  // };
 
   // const retrieveMeat = ({ item, index }) => {
   //   const x = item.meats.en;
@@ -41,11 +41,7 @@ const ItemForm = ({ item, open, onClose, getValueFromForm }) => {
   return (
     <Box>
       {open && (
-        <Layer
-          position='center'
-          onClickOutside={onCloseReset}
-          onEsc={onCloseReset}
-        >
+        <Layer position='center' onClickOutside={onClose} onEsc={onClose}>
           <Box pad='medium' width='large' align='start'>
             <Grid
               rows={['xxsmall', 'small', 'xxxsmall', 'medium', 'xsmall']}

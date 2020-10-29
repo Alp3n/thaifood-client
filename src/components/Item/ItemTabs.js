@@ -2,30 +2,24 @@ import React from 'react';
 import { Tab, Tabs } from 'grommet';
 
 import ItemGrid from './ItemGrid';
-import YourOrderButton from '../Order/YourOrderButton';
+import YourOrderButton from '../order/YourOrderButton';
 
-const ItemTabs = ({
-  orderCount,
-  showSidebar,
-  setShowSidebar,
-  getValueFromForm,
-}) => (
-  <Tabs>
+const ItemTabs = ({ showSidebar, setShowSidebar }) => (
+  <Tabs overflow='auto'>
     <Tab title='Rice'>
-      <ItemGrid type='rice' getValueFromForm={getValueFromForm} />
+      <ItemGrid type='rice' />
     </Tab>
     <Tab title='Noodles'>
-      <ItemGrid type='noodles' getValueFromForm={getValueFromForm} />
+      <ItemGrid type='noodles' />
     </Tab>
     <Tab title='Soups'>
-      <ItemGrid type='soup' getValueFromForm={getValueFromForm} />
+      <ItemGrid type='soup' />
     </Tab>
     <Tab title='Drink'>
-      <ItemGrid type='drink' getValueFromForm={getValueFromForm} />
+      <ItemGrid type='drink' />
     </Tab>
     <YourOrderButton
-      margin-left='small'
-      orderCount={orderCount}
+      orderCount={3}
       setShowSidebar={setShowSidebar}
       showSidebar={showSidebar}
     />

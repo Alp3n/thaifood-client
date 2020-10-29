@@ -2,6 +2,7 @@ import React from 'react';
 import { Box, Button, Nav, Text } from 'grommet';
 import { Cafeteria } from 'grommet-icons';
 import { Link } from 'react-router-dom';
+import ItemSearchBar from '../item/ItemSearchBar';
 
 const NavBar = (props) => (
   <Nav
@@ -12,12 +13,14 @@ const NavBar = (props) => (
     background='brand'
     pad={{ left: 'medium', right: 'small', vertical: 'small' }}
     style={{ zIndex: '1' }}
+    border='bottom'
   >
     <Box>
       <Link to='/'>
         <Button plain icon={<Cafeteria />} color='white' label='ThaiFood' />
       </Link>
     </Box>
+    <Box width='medium'>{props.children}</Box>
     <Box
       direction='row'
       align='center'
@@ -30,10 +33,10 @@ const NavBar = (props) => (
       <Link to='/about'>
         <Button plain color='white' label='About' />
       </Link>
-      <Link to='/signin'>
+      <Link to='/sign-in'>
         <Button primary color='white' label='Sign In' />
       </Link>
-      <Link to='/signup'>
+      <Link to='/sign-up'>
         <Button plain color='white' label='Sign Up' />
       </Link>
     </Box>

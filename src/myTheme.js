@@ -1,11 +1,13 @@
 import { css } from 'styled-components';
 
+const orange = '#ff7e67';
+
 const myTheme = {
   global: {
     colors: {
       brand: '#3b5249',
       'accent-1': '#ff7e67',
-      focus: 'accent-4',
+      focus: 'accent-1',
       'accent-2': '#519872',
       'accent-3': '#a4b494',
     },
@@ -25,21 +27,23 @@ const myTheme = {
   },
   tab: {
     active: {
-      color: 'accent-4',
+      //accent-4
+      color: orange,
     },
     border: {
       active: {
-        color: 'accent-4',
+        //accent-4
+        color: orange,
       },
     },
-    pad: 'small',
+    pad: { top: 'small' },
   },
   tabs: {
     header: {
-      background: 'accent-3',
+      background: '#eee',
     },
-    pad: 'small',
-    gap: 'large',
+    pad: { bottom: 'small' },
+    gap: 'small',
     extend: css`
       display: flex;
     `,

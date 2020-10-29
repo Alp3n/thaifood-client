@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Box } from 'grommet';
-import NavBar from '../components/NavBar';
+import NavBar from '../components/nav/NavBar';
 
 import UserService from '../services/user.service';
 
