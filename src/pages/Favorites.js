@@ -10,6 +10,7 @@ import FavoriteCard from '../components/favorite/FavoriteCard';
 
 const favData = [
   {
+    id: 1,
     title: 'Fourth fav',
     items: [
       {
@@ -27,6 +28,7 @@ const favData = [
     ],
   },
   {
+    id: 2,
     title: 'Second fav',
     items: [
       {
@@ -40,6 +42,7 @@ const favData = [
     ],
   },
   {
+    id: 3,
     title: 'Third fav',
     items: [
       {
@@ -49,6 +52,7 @@ const favData = [
     ],
   },
   {
+    id: 4,
     title: 'Fourth fav',
     items: [
       {
@@ -66,6 +70,7 @@ const favData = [
     ],
   },
   {
+    id: 5,
     title: 'Fifth fav',
     items: [
       {
@@ -91,6 +96,7 @@ const favData = [
     ],
   },
   {
+    id: 6,
     title: 'Third fav',
     items: [
       {

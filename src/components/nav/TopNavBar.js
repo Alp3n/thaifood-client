@@ -23,7 +23,7 @@ const TopNavBar = (props) => {
       align='center'
       background='brand'
       direction='row'
-      pad='medium'
+      pad='small'
       gap='medium'
     >
       <Menu

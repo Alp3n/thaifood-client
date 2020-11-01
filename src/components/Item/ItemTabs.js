@@ -19,7 +19,6 @@ const ItemTabs = ({ showSidebar, setShowSidebar }) => (
       <ItemGrid type='drink' />
     </Tab>
     <YourOrderButton
-      orderCount={3}
       setShowSidebar={setShowSidebar}
       showSidebar={showSidebar}
     />

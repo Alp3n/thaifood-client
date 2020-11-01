@@ -20,7 +20,7 @@ const IconButton = ({ icon, onClick, route }) => {
         justify='center'
         align='center'
         onClick={onClick}
-        pad='medium'
+        pad='small'
       >
         {icon}
       </Box>

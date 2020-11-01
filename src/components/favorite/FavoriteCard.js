@@ -17,7 +17,7 @@ const FavoriteCard = ({ favorite, onOpen }) => {
   const size = useContext(ResponsiveContext);
   return (
     <Card
-      key={favorite._id}
+      key={favorite.id}
       onClick={() => onOpen(favorite._id)}
       round='small'
       elevation='small'

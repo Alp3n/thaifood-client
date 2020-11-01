@@ -11,23 +11,10 @@ import {
   ResponsiveContext,
 } from 'grommet';
 
-const ItemCard = ({ item, onOpen }) => {
-  const handleAllergens = (item) => {
-    if (item.allergens[0] !== null) {
-      return item.allergens.join(', ');
-    } else {
-      return 'None';
-    }
-  };
-
+const ItemCard = ({ item, onOpen, handleAllergens }) => {
   const size = useContext(ResponsiveContext);
   return (
-    <Card
-      key={item._id}
-      onClick={() => onOpen(item._id)}
-      round='small'
-      elevation='small'
-    >
+    <Card key={item._id} onClick={() => onOpen(item._id)} round='small'>
       <Stack anchor='bottom-left'>
         <CardBody height={size !== 'small' ? 'medium' : 'small'} width='medium'>
           <Image fit='cover' src={item.image} />

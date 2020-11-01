@@ -16,18 +16,8 @@ import TopNavBar from '../components/nav/TopNavBar';
 
 const Home = () => {
   const [user, setUser] = useState('hello');
-  const size = useContext(ResponsiveContext);
   const [showSidebar, setShowSidebar] = useState(false);
-  // const [orderCount, setOrderCount] = useState();
-  // const [value, setValue] = useState([]);
-
-  // const getValueFromForm = (someValue) => {
-  //   setValue((value) => {
-  //     return { ...value, someValue };
-  //   });
-
-  //   console.log(value);
-  // };
+  const size = useContext(ResponsiveContext);
 
   return (
     <Box fill>

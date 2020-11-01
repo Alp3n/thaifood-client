@@ -19,7 +19,7 @@ const ItemGrid = ({ type }) => {
       const response = await Axios.get(url);
       const newData = response.data.items;
       setItems(...items, newData);
-      console.log(items);
+      // console.log(items);
     } catch (err) {
       console.error(err);
     }
@@ -42,6 +42,14 @@ const ItemGrid = ({ type }) => {
   const selectedItem = filteredData.find((item) => item._id === selectedId);
   const size = useContext(ResponsiveContext);
 
+  const handleAllergens = (item) => {
+    if (item.allergens[0] !== null) {
+      return item.allergens.join(', ');
+    } else {
+      return 'None';
+    }
+  };
+
   return (
     <Box
       fill
@@ -59,10 +67,15 @@ const ItemGrid = ({ type }) => {
         }
       >
         <InfiniteScroll items={filteredData}>
-          {(item) => ItemCard({ item, onOpen })}
+          {(item) => ItemCard({ item, onOpen, handleAllergens })}
         </InfiniteScroll>
       </Grid>
-      <ItemForm item={selectedItem} open={open} onClose={onClose} />
+      <ItemForm
+        item={selectedItem}
+        open={open}
+        onClose={onClose}
+        handleAllergens={handleAllergens}
+      />
     </Box>
   );
 };

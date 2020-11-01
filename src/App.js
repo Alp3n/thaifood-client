@@ -13,11 +13,15 @@ import Admin from './pages/Admin';
 import Favorites from './pages/Favorites';
 import Guide from './pages/Guide';
 
+import OrderContextProvider from './contexts/OrderContext';
+
 function App() {
   return (
     <Grommet theme={myTheme} full>
       <Switch>
-        <Route path='/' component={Home} exact />
+        <OrderContextProvider>
+          <Route path='/' component={Home} exact />
+        </OrderContextProvider>
         <Route path='/about' component={About} exact />
         <Route path='/favorites' component={Favorites} exact />
         <Route path='/guide' component={Guide} exact />

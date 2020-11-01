@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Box, Button, Collapsible, Text } from 'grommet';
 import OrderList from './OrderList';
+import { OrderContext } from '../../contexts/OrderContext';
 
 const OrderSidebar = ({ showSidebar }) => {
-  const orderLength = 1;
+  const { order, clearOrder } = useContext(OrderContext);
   return (
     <Collapsible direction='horizontal' open={showSidebar}>
       <Box
@@ -14,15 +15,19 @@ const OrderSidebar = ({ showSidebar }) => {
         border='left'
         justify='center'
       >
-        {orderLength > 0 ? (
-          <OrderList />
+        {order.length > 0 ? (
+          <Box>
+            <OrderList />
+            <Box direction='row' align='center' justify='between' pad='medium'>
+              <Button label='Clear' onClick={() => clearOrder()} />
+              <Button label='Translate' primary />
+            </Box>
+          </Box>
         ) : (
-          <Text>Your order list is empty, add something</Text>
+          <Box align='center'>
+            <Text>Your order list is empty, add something</Text>
+          </Box>
         )}
-        <Box direction='row' align='center' justify='between' pad='medium'>
-          <Button label='Reset' />
-          <Button label='Translate' primary />
-        </Box>
       </Box>
     </Collapsible>
   );

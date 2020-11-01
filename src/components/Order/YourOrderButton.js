@@ -1,9 +1,12 @@
 import React, { useContext } from 'react';
 import { Box, Button, Stack, Text, ResponsiveContext } from 'grommet';
 import { List } from 'grommet-icons';
+import { OrderContext } from '../../contexts/OrderContext';
 
-const YourOrderButton = ({ orderCount, showSidebar, setShowSidebar }) => {
+const YourOrderButton = ({ showSidebar, setShowSidebar }) => {
   const size = useContext(ResponsiveContext);
+  const { order } = useContext(OrderContext);
+  console.log(order.length);
   return (
     <Box pad='small'>
       <Stack anchor='bottom-right'>
@@ -14,7 +17,7 @@ const YourOrderButton = ({ orderCount, showSidebar, setShowSidebar }) => {
           icon={<List />}
           onClick={() => setShowSidebar(!showSidebar)}
         />
-        {orderCount !== 0 ? (
+        {order.length > 0 ? (
           <Box
             background='#ff7e67'
             pad={
@@ -24,7 +27,7 @@ const YourOrderButton = ({ orderCount, showSidebar, setShowSidebar }) => {
             }
             round
           >
-            <Text>{orderCount}</Text>
+            <Text>{order.length}</Text>
           </Box>
         ) : null}
       </Stack>

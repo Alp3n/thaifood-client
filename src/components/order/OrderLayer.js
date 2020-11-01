@@ -26,14 +26,18 @@ const OrderLayer = ({ showSidebar, setShowSidebar }) => {
           />
         </Box>
         {orderLength > 0 ? (
-          <OrderList />
+          <Box>
+            <OrderList />
+            <Box direction='row' align='center' justify='around' pad='medium'>
+              <Button label='Reset' />
+              <Button label='Translate' primary />
+            </Box>
+          </Box>
         ) : (
-          <Text>Your order list is empty, add something</Text>
+          <Box align='center'>
+            <Text>Your order list is empty, add something</Text>
+          </Box>
         )}
-        <Box direction='row' align='center' justify='around' pad='medium'>
-          <Button label='Reset' />
-          <Button label='Translate' primary />
-        </Box>
       </Box>
     </Layer>
   );

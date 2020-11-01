@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import {
   Box,
   Button,
@@ -12,31 +12,25 @@ import {
   Text,
 } from 'grommet';
 import { Close } from 'grommet-icons';
+import { OrderContext } from '../../contexts/OrderContext';
 
-const ItemForm = ({ item, open, onClose, getValueFromForm }) => {
-  // const defaultValue = {
-  //   meat: null,
-  //   noodle: null,
-  //   egg: null,
-  //   spicy: null,
-  //   additional: null,
-  //   sweet: null,
-  //   quantity: null,
-  // };
-
-  console.log(item);
-
-  let customValue = {};
+const ItemForm = ({ item, open, onClose, handleAllergens }) => {
+  const defaultValue = {
+    meat: null,
+    noodle: null,
+    egg: null,
+    spicy: null,
+    additional: null,
+    sweet: null,
+    quantity: null,
+  };
 
   // const onCloseReset = () => {
   //   onClose();
   //   // getValueFromForm(customValue);
   // };
 
-  // const retrieveMeat = ({ item, index }) => {
-  //   const x = item.meats.en;
-  //   x.forEach();
-  // };
+  const { addToOrder } = useContext(OrderContext);
 
   return (
     <Box>
@@ -74,96 +68,89 @@ const ItemForm = ({ item, open, onClose, getValueFromForm }) => {
                 <Image fit='cover' src={item.image} />
               </Box>
               <Box gridArea='allergens'>
-                <Text>List of allerges: {item.allergens.join(', ')}</Text>
+                <Text>List of allerges: {handleAllergens(item)}</Text>
               </Box>
               <Box gridArea='form'>
                 <Form
-                  value={customValue}
-                  onChange={(nextValue) => {
-                    console.log('Change', nextValue);
-                    customValue = nextValue;
-                  }}
-                  onReset={() => customValue}
-                  onSubmit={(event) => {
-                    // console.log('Submited', event.value, event.touched);
-                    console.log('Submit', event.value);
-                    customValue = event.value;
-                    const value =
-                      (customValue, (customValue.name = item.names.en));
-                    getValueFromForm(value);
+                  onChange={(value) => console.log('Change', value)}
+                  onReset={() => defaultValue}
+                  onSubmit={({ value }) => {
+                    addToOrder(value);
                     onClose();
                   }}
                 >
-                  {/* {item.sweet == false || undefined ? ( */}
                   {item.meats.length > 0 && (
-                    <FormField label='Meat'>
-                      <Select
-                        options={item.meats.map((meat) => meat.en)}
-                        placeholder='Select type of meat'
-                        name='meat'
-                        required
-                      />
-                    </FormField>
+                    <FormField
+                      component={Select}
+                      label='Meat'
+                      options={item.meats.map((meat) => meat.en)}
+                      placeholder='Select type of meat'
+                      name='meat'
+                      required
+                    />
                   )}
 
-                  {/* ) : ( */}
                   {item.sweet && (
-                    <FormField label='Sweetness'>
-                      <Select
-                        options={[
-                          'Not Sweet',
-                          'Little Sweet',
-                          'Sweet',
-                          'Very Sweet',
-                        ]}
-                        placeholder='Select level of sweetness'
-                        name='sweet'
-                        required
-                      />
-                    </FormField>
+                    <FormField
+                      component={Select}
+                      label='Sweetness'
+                      options={[
+                        'Not Sweet',
+                        'Little Sweet',
+                        'Sweet',
+                        'Very Sweet',
+                      ]}
+                      placeholder='Select level of sweetness'
+                      name='sweet'
+                      required
+                    />
                   )}
+
                   {item.egg && (
-                    <FormField label='Egg'>
-                      <Select
-                        options={['None', 'Fried', 'Omlet']}
-                        name='egg'
-                        placeholder='Select egg option'
-                        required
-                      />
-                    </FormField>
+                    <FormField
+                      component={Select}
+                      label='Egg'
+                      options={['None', 'Fried', 'Omlet']}
+                      name='egg'
+                      placeholder='Select egg option'
+                      required
+                    />
                   )}
                   {item.type === 'noodles' && (
-                    <FormField label='Noodles'>
-                      <Select
-                        options={['Thin', 'Wide', 'Something', 'Something']}
-                        placeholder='Select type of noodles'
-                        name='noodle'
-                        required
-                      />
-                    </FormField>
-                  )}
-                  {item.spicy && (
-                    <FormField label='Spiciness'>
-                      <Select
-                        options={[
-                          'Not Spicy',
-                          'Little Spicy',
-                          'Spicy',
-                          'Very Spicy',
-                        ]}
-                        name='spicy'
-                        placeholder='Select level of spiciness'
-                        required
-                      />
-                    </FormField>
-                  )}
-                  <FormField label='Additional'>
-                    <Select
-                      options={['None', 'Something']}
-                      name='additional'
-                      placeholder='Select any additional info'
+                    <FormField
+                      component={Select}
+                      label='Noodles'
+                      options={['Thin', 'Wide', 'Something', 'Something']}
+                      placeholder='Select type of noodles'
+                      name='noodle'
+                      required
                     />
-                  </FormField>
+                  )}
+
+                  {item.spicy && (
+                    <FormField
+                      component={Select}
+                      label='Spiciness'
+                      options={[
+                        'Not Spicy',
+                        'Little Spicy',
+                        'Spicy',
+                        'Very Spicy',
+                      ]}
+                      name='spicy'
+                      placeholder='Select level of spiciness'
+                      required
+                    />
+                  )}
+                  <FormField
+                    component={Select}
+                    label='Additional'
+                    options={['None', 'Something']}
+                    name='additional'
+                    placeholder='Select any additional info'
+                    required
+                  />
+
                   <Box
                     direction='row'
                     gridArea='buttons'
