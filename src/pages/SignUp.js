@@ -1,60 +1,16 @@
-import React, { useState, useRef } from 'react';
-import { Box } from 'grommet';
+import React, { useContext } from 'react';
+import { Box, ResponsiveContext } from 'grommet';
 import NavBar from '../components/nav/NavBar';
+import TopNavBar from '../components/nav/TopNavBar';
+
 import SignBox from '../components/sign/SignBox';
-import AuthService from '../services/auth.service';
 //TODO JWT AUTH
 const SignUp = (props) => {
-  const form = useRef();
-  const checkBtn = useRef();
-
-  const [email, setEmail] = useState('');
-  const [pass, setPass] = useState('');
-  const [successful, setSuccessful] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [message, setMessage] = useState('');
-
-  const onChangeEmail = (e) => {
-    const email = e.target.value;
-    setEmail(email);
-  };
-  const onChangePass = (e) => {
-    const pass = e.target.value;
-    setPass(pass);
-  };
-
-  const handleSignUp = (e) => {
-    e.preventDefault();
-
-    setMessage('');
-    setSuccessful(false);
-
-    form.current.validateAll();
-
-    if (checkBtn.current.context._errors.length === 0) {
-      AuthService.register(email, pass).then(
-        (response) => {
-          setMessage(response.data.message);
-          setSuccessful(true);
-        },
-        (error) => {
-          const resMessage =
-            (error.response &&
-              error.response.data &&
-              error.response.data.message) ||
-            error.message ||
-            error.toString();
-
-          setMessage(resMessage);
-          setSuccessful(false);
-        }
-      );
-    }
-  };
+  const size = useContext(ResponsiveContext);
 
   return (
     <Box fill background='accent-3'>
-      <NavBar />
+      {size !== 'small' ? <NavBar /> : <TopNavBar />}
       <Box
         direction='row'
         flex
@@ -64,11 +20,11 @@ const SignUp = (props) => {
       >
         <SignBox
           signIn={false}
-          email={email}
-          pass={pass}
-          onChangeEmail={onChangeEmail}
-          onChangePass={onChangePass}
-          handleSignUp={handleSignUp}
+          // email={email}
+          // pass={pass}
+          // onChangeEmail={onChangeEmail}
+          // onChangePass={onChangePass}
+          // handleSignUp={handleSignUp}
         />
       </Box>
     </Box>

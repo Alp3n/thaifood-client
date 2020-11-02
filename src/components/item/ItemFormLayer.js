@@ -1,21 +1,27 @@
 import React, { useContext } from 'react';
+import styled from 'styled-components';
 import {
   Box,
   Button,
   Form,
   FormField,
-  Grid,
-  Heading,
   Image,
   Layer,
-  ResponsiveContext,
   Select,
   Text,
 } from 'grommet';
 import { Close } from 'grommet-icons';
 import { OrderContext } from '../../contexts/OrderContext';
 
-const ItemForm = ({ item, open, onClose, handleAllergens }) => {
+const StyledButtonBar = styled(Box)`
+  overflow: hidden;
+  position: fixed;
+  bottom: 0;
+  height: auto;
+  width: 100%;
+`;
+
+const ItemFormLayer = ({ item, open, onClose, handleAllergens }) => {
   // const defaultValue = {
   //   meat: null,
   //   noodle: null,
@@ -30,88 +36,57 @@ const ItemForm = ({ item, open, onClose, handleAllergens }) => {
   //   onClose();
   //   // getValueFromForm(customValue);
   // };
-  const size = useContext(ResponsiveContext);
+
   const { addToOrder } = useContext(OrderContext);
-
-  const rowsDesktop = ['xxsmall', 'small', 'xxxsmall', 'medium', 'xsmall'];
-  const rowsMobile = [
-    'xxsmall',
-    'small',
-    'xxxsmall',
-    'xxxsmall',
-    'medium',
-    'xsmall',
-  ];
-
-  const columnsDesktop = ['1/5', '4/5'];
-  const columnsMobile = ['100%'];
-
-  const areasDesktop = [
-    ['header', 'header'],
-    ['desc', 'image'],
-    ['allergens', 'allergens'],
-    ['form', 'form'],
-    ['buttons', 'buttons'],
-  ];
-
-  const areasMobile = [
-    ['header'],
-    ['image'],
-    ['desc'],
-    ['allergens'],
-    ['form'],
-    // ['buttons']
-  ];
 
   return (
     <Box>
       {open && (
-        <Layer position='center' onClickOutside={onClose} onEsc={onClose}>
-          <Box pad='medium' width='large' align='start'>
-            <Grid
-              areas={size !== 'small' ? areasDesktop : areasMobile}
-              rows={size !== 'small' ? rowsDesktop : rowsMobile}
-              columns={size !== 'small' ? columnsDesktop : columnsMobile}
-              gap='xsmall'
-              fill={size === 'small' ? 'true' : null}
-            >
+        <Layer
+          position='bottom'
+          onClickOutside={onClose}
+          onEsc={onClose}
+          margin={{ top: '50px' }}
+        >
+          <Box width='large' align='start'>
+            <Box elevation='small' fill='horizontal' background='#eee'>
               <Box
                 tag='header'
                 direction='row'
                 align='center'
                 justify='between'
-                gridArea='header'
+                pad='small'
+                background='brand'
               >
-                <Box direction='row' gap='medium'>
-                  <Heading level={3} margin='none'>
-                    {item.names.en}
-                  </Heading>
-                  <Text>{item.names.pron}</Text>
+                <Box direction='row' align='center' gap='medium' pad='medium'>
+                  <Text size='large'>{item.names.en}</Text>
+                  <Text color='light-4'>{item.names.pron}</Text>
                 </Box>
-
                 <Button
                   icon={<Close color='status-critical' />}
                   onClick={onClose}
                 />
               </Box>
-              <Box gridArea='desc'>
-                <Text>{item.desc}</Text>
-              </Box>
-              <Box gridArea='image' width='medium' height='small'>
+              <Box height='small'>
                 <Image fit='cover' src={item.image} />
               </Box>
-              <Box gridArea='allergens'>
-                <Text color='dark-4'>Allerges: {handleAllergens(item)}</Text>
+              <Box pad='medium'>
+                <Text>{item.desc}</Text>
               </Box>
-              <Box gridArea='form' overflow='auto'>
-                <Form
-                  onChange={(value) => console.log('Change', value)}
-                  onReset={() => {}}
-                  onSubmit={({ value }) => {
-                    addToOrder(value);
-                    onClose();
-                  }}
-                >
+              <Box pad='medium'>
+                <Text>Allerges: {handleAllergens(item)}</Text>
+              </Box>
+            </Box>
+            <Box overflow='auto' fill='horizontal'>
+              <Form
+                onChange={(value) => console.log('Change', value)}
+                onReset={() => {}}
+                onSubmit={({ value }) => {
+                  addToOrder(value);
+                  onClose();
+                }}
+              >
+                <Box pad={{ bottom: '50px' }}>
                   {item.meats.length > 0 && (
                     <FormField
                       component={Select}
@@ -183,19 +158,20 @@ const ItemForm = ({ item, open, onClose, handleAllergens }) => {
                     placeholder='Select any additional info'
                     required
                   />
-                  <Box
-                    direction='row'
-                    // gridArea='buttons'
-                    align='center'
-                    justify='between'
-                    overflow='visible'
-                  >
-                    <Button type='reset' label='Reset' />
-                    <Button type='submit' label='Add to Order' primary />
-                  </Box>
-                </Form>
-              </Box>
-            </Grid>
+                </Box>
+                <StyledButtonBar
+                  align='center'
+                  direction='row'
+                  background='#eee'
+                  pad='small'
+                  justify='between'
+                  elevation='upper'
+                >
+                  <Button type='reset' label='Reset' />
+                  <Button type='submit' label='Add to Order' primary />
+                </StyledButtonBar>
+              </Form>
+            </Box>
           </Box>
         </Layer>
       )}
@@ -203,4 +179,4 @@ const ItemForm = ({ item, open, onClose, handleAllergens }) => {
   );
 };
 
-export default ItemForm;
+export default ItemFormLayer;

@@ -13,22 +13,17 @@ import Admin from './pages/Admin';
 import Favorites from './pages/Favorites';
 import Guide from './pages/Guide';
 
-import OrderContextProvider from './contexts/OrderContext';
-
 function App() {
   return (
     <Grommet theme={myTheme} full>
       <Switch>
-        <OrderContextProvider>
-          <Route path='/' component={Home} exact />
-        </OrderContextProvider>
+        <Route path='/' component={Home} exact />
         <Route path='/about' component={About} exact />
         <Route path='/favorites' component={Favorites} exact />
         <Route path='/guide' component={Guide} exact />
         <Route path='/sign-in' component={SignIn} exact />
         <Route path='/sign-up' component={SignUp} exact />
         <Route path='/admin' component={Admin} exact />
-
         <Route path='*' component={() => '404 NOT FOUND'} />
       </Switch>
     </Grommet>

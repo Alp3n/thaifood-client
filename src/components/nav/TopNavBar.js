@@ -1,20 +1,31 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Box, Menu } from 'grommet';
 import { Menu as MenuIcon } from 'grommet-icons';
 
+// const MenuItem = (label, route) => {
+//   <Link to={route}>
+//     <Button plain label={label} />
+//   </Link>;
+// };
+
 const menuItems = [
   {
+    label: 'About',
+    onClick: () => <Link to='/about' />,
+  },
+  {
     label: 'Sign In',
-    onClick: () => {
-      alert('Menu1');
-    },
+    onClick: () => <Link to='/sign-in' />,
   },
   {
     label: 'Sign Up',
-    onClick: () => {
-      alert('Menu2');
-    },
+    onClick: () => <Link to='/sign-up' />,
   },
+
+  // <MenuItem label='About' route='/about' />,
+  // <MenuItem label='Sign In' route='/sign-in' />,
+  // <MenuItem label='Sign Up' route='/sign-up' />,
 ];
 
 const TopNavBar = (props) => {
@@ -31,7 +42,7 @@ const TopNavBar = (props) => {
         items={menuItems.map((item) => item)}
         icon={<MenuIcon />}
       />
-      <Box fill='horizontal' pad={{ right: 'medium' }}>
+      <Box fill='horizontal' pad='medium'>
         {props.children}
       </Box>
     </Box>

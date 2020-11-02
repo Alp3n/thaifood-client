@@ -3,6 +3,7 @@ import Axios from 'axios';
 import { Box, Grid, InfiniteScroll, ResponsiveContext } from 'grommet';
 import ItemCard from './ItemCard';
 import ItemForm from './ItemForm';
+import ItemFormLayer from './ItemFormLayer';
 
 const ItemGrid = ({ type }) => {
   const url = 'http://localhost:9000/items';
@@ -70,12 +71,21 @@ const ItemGrid = ({ type }) => {
           {(item) => ItemCard({ item, onOpen, handleAllergens })}
         </InfiniteScroll>
       </Grid>
-      <ItemForm
-        item={selectedItem}
-        open={open}
-        onClose={onClose}
-        handleAllergens={handleAllergens}
-      />
+      {size !== 'small' ? (
+        <ItemForm
+          item={selectedItem}
+          open={open}
+          onClose={onClose}
+          handleAllergens={handleAllergens}
+        />
+      ) : (
+        <ItemFormLayer
+          item={selectedItem}
+          open={open}
+          onClose={onClose}
+          handleAllergens={handleAllergens}
+        />
+      )}
     </Box>
   );
 };

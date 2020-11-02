@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import {
   Box,
@@ -7,10 +7,12 @@ import {
   FormField,
   Heading,
   MaskedInput,
+  ResponsiveContext,
   Text,
   TextInput,
 } from 'grommet';
-//TODO JWT AUTH
+//TODO JWT AUTH'
+
 const SignBox = ({
   signIn,
   email,
@@ -20,14 +22,13 @@ const SignBox = ({
   handleSignIn,
   handleSignUp,
 }) => {
+  const size = useContext(ResponsiveContext);
   return (
     <Box
       align='center'
       justify='center'
-      width='medium'
-      // height='medium'
+      width={size !== 'small' ? 'medium' : '100%'}
       background='#eee'
-      round='xsmall'
       pad='small'
     >
       <Heading level='2'>{signIn ? 'Sign In' : 'Sign Up'}</Heading>

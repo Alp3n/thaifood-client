@@ -16,6 +16,14 @@ const myTheme = {
       size: '18px',
       height: '20px',
     },
+    elevation: {
+      light: {
+        upper: '0px -2px 4px rgba(0,0,0,0.20) ',
+      },
+      dark: {
+        upper: '0px -2px 4px rgba(0,0,0,0.20) ',
+      },
+    },
   },
   card: {
     container: {

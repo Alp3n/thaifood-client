@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Box, TextInput } from 'grommet';
+import { TextInput } from 'grommet';
 import { Search } from 'grommet-icons';
 
 const ItemSearchBar = () => {

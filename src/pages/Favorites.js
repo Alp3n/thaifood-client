@@ -1,7 +1,6 @@
 import React, { useContext } from 'react';
 
 import { Box, Grid, InfiniteScroll, Text, ResponsiveContext } from 'grommet';
-import { Trash } from 'grommet-icons';
 
 import NavBar from '../components/nav/NavBar';
 import TopNavBar from '../components/nav/TopNavBar';

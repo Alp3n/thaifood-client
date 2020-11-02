@@ -1,8 +1,8 @@
 import React from 'react';
-import { Box, Button, Nav, Text } from 'grommet';
+import { Box, Button, Nav } from 'grommet';
 import { Cafeteria } from 'grommet-icons';
 import { Link } from 'react-router-dom';
-import ItemSearchBar from '../item/ItemSearchBar';
+// import ItemSearchBar from '../item/ItemSearchBar';
 
 const NavBar = (props) => (
   <Nav

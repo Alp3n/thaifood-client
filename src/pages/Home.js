@@ -2,6 +2,9 @@ import React, { useState, useContext } from 'react';
 
 import { Box, ResponsiveContext, Text } from 'grommet';
 
+//Order Context
+import OrderContextProvider from '../contexts/OrderContext';
+
 //Items
 import ItemTabs from '../components/item/ItemTabs';
 // import ItemSearchBar from '../components/item/ItemSearchBar';
@@ -20,43 +23,45 @@ const Home = () => {
   const size = useContext(ResponsiveContext);
 
   return (
-    <Box fill>
-      {size !== 'small' ? (
-        <NavBar />
-      ) : (
-        <TopNavBar>
-          {/* <ItemSearchBar /> */}
-          <Text size='large'>Compose</Text>
-        </TopNavBar>
-      )}
-      <Box direction='row' fill overflow={{ horizontal: 'hidden' }}>
-        <Box
-          flex='grow'
-          background='accent-3'
-          overflow={{ horizontal: 'hidden' }}
-        >
-          <ItemTabs
-            orderCount={3}
-            setShowSidebar={setShowSidebar}
-            showSidebar={showSidebar}
-          />
+    <OrderContextProvider>
+      <Box fill>
+        {size !== 'small' ? (
+          <NavBar />
+        ) : (
+          <TopNavBar>
+            {/* <ItemSearchBar /> */}
+            <Text size='large'>Compose</Text>
+          </TopNavBar>
+        )}
+        <Box direction='row' fill overflow={{ horizontal: 'hidden' }}>
+          <Box
+            flex='grow'
+            background='accent-3'
+            overflow={{ horizontal: 'hidden' }}
+          >
+            <ItemTabs
+              orderCount={3}
+              setShowSidebar={setShowSidebar}
+              showSidebar={showSidebar}
+            />
+          </Box>
+          {!showSidebar ||
+            (!size !== 'small' && <OrderSidebar showSidebar={showSidebar} />)}
         </Box>
         {!showSidebar ||
-          (!size !== 'small' && <OrderSidebar showSidebar={showSidebar} />)}
+          (size === 'small' && (
+            <OrderLayer
+              showSidebar={showSidebar}
+              setShowSidebar={setShowSidebar}
+            />
+          ))}
+        {size === 'small' && user !== undefined && (
+          <Box align='center'>
+            <BottomNavBar />
+          </Box>
+        )}
       </Box>
-      {!showSidebar ||
-        (size === 'small' && (
-          <OrderLayer
-            showSidebar={showSidebar}
-            setShowSidebar={setShowSidebar}
-          />
-        ))}
-      {size === 'small' && user !== undefined && (
-        <Box align='center'>
-          <BottomNavBar />
-        </Box>
-      )}
-    </Box>
+    </OrderContextProvider>
   );
 };
 
