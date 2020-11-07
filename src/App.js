@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Grommet, Box, Text } from 'grommet';
+import { Grommet } from 'grommet';
 import myTheme from './myTheme';
 
 import { Switch, Route } from 'react-router-dom';

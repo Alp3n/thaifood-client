@@ -17,7 +17,7 @@ const NavBar = (props) => (
   >
     <Box>
       <Link to='/'>
-        <Button plain icon={<Cafeteria />} color='white' label='ThaiFood' />
+        <Button plain icon={<Cafeteria />} color='white' label='AppThai' />
       </Link>
     </Box>
     <Box width='medium'>{props.children}</Box>

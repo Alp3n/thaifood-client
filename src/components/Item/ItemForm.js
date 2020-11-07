@@ -101,7 +101,7 @@ const ItemForm = ({ item, open, onClose, handleAllergens }) => {
                 <Image fit='cover' src={item.image} />
               </Box>
               <Box gridArea='allergens'>
-                <Text color='dark-4'>Allerges: {handleAllergens(item)}</Text>
+                <Text>Allerges: {handleAllergens(item)}</Text>
               </Box>
               <Box gridArea='form' overflow='auto'>
                 <Form
@@ -112,7 +112,7 @@ const ItemForm = ({ item, open, onClose, handleAllergens }) => {
                     onClose();
                   }}
                 >
-                  {item.meats.length > 0 && (
+                  {item?.meats.length > 0 && (
                     <FormField
                       component={Select}
                       label='Meat'
@@ -123,23 +123,7 @@ const ItemForm = ({ item, open, onClose, handleAllergens }) => {
                     />
                   )}
 
-                  {item.sweet && (
-                    <FormField
-                      component={Select}
-                      label='Sweetness'
-                      options={[
-                        'Not Sweet',
-                        'Little Sweet',
-                        'Sweet',
-                        'Very Sweet',
-                      ]}
-                      placeholder='Select level of sweetness'
-                      name='sweet'
-                      required
-                    />
-                  )}
-
-                  {item.egg && (
+                  {item?.egg && (
                     <FormField
                       component={Select}
                       label='Egg'
@@ -149,6 +133,7 @@ const ItemForm = ({ item, open, onClose, handleAllergens }) => {
                       required
                     />
                   )}
+
                   {item.type === 'noodles' && (
                     <FormField
                       component={Select}
@@ -160,7 +145,7 @@ const ItemForm = ({ item, open, onClose, handleAllergens }) => {
                     />
                   )}
 
-                  {item.spicy && (
+                  {item?.spicy && (
                     <FormField
                       component={Select}
                       label='Spiciness'
@@ -172,6 +157,22 @@ const ItemForm = ({ item, open, onClose, handleAllergens }) => {
                       ]}
                       name='spicy'
                       placeholder='Select level of spiciness'
+                      required
+                    />
+                  )}
+
+                  {item?.sweet && (
+                    <FormField
+                      component={Select}
+                      label='Sweetness'
+                      options={[
+                        'Not Sweet',
+                        'Little Sweet',
+                        'Sweet',
+                        'Very Sweet',
+                      ]}
+                      name='sweet'
+                      placeholder='Select level of sweetness'
                       required
                     />
                   )}

@@ -5,8 +5,8 @@ import { OrderContext } from '../../contexts/OrderContext';
 
 const YourOrderButton = ({ showSidebar, setShowSidebar }) => {
   const size = useContext(ResponsiveContext);
+
   const { order } = useContext(OrderContext);
-  console.log(order.length);
   return (
     <Box pad='small'>
       <Stack anchor='bottom-right'>

@@ -18,7 +18,7 @@ const FavoriteCard = ({ favorite, onOpen }) => {
     <Card
       key={favorite.id}
       onClick={() => onOpen(favorite._id)}
-      round='small'
+      round='xxsmall'
       elevation='small'
     >
       <CardHeader

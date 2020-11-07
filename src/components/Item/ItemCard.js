@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import {
   Box,
   Card,
@@ -8,16 +8,14 @@ import {
   Image,
   Stack,
   Text,
-  ResponsiveContext,
 } from 'grommet';
 
-const ItemCard = ({ item, onOpen, handleAllergens }) => {
-  const size = useContext(ResponsiveContext);
+const ItemCard = ({ item, size, onOpen, handleAllergens }) => {
   return (
     <Card
       key={item._id}
       onClick={() => onOpen(item._id)}
-      // round='small'
+      round='xxsmall'
       elevation='small'
     >
       <Stack anchor='bottom-left'>

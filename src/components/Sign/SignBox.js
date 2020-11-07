@@ -30,6 +30,7 @@ const SignBox = ({
       width={size !== 'small' ? 'medium' : '100%'}
       background='#eee'
       pad='small'
+      round='xxsmall'
     >
       <Heading level='2'>{signIn ? 'Sign In' : 'Sign Up'}</Heading>
       <Box fill='horizontal' pad='small'>
