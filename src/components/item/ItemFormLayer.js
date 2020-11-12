@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import styled from 'styled-components';
 import {
   Box,
@@ -22,22 +22,14 @@ const StyledButtonBar = styled(Box)`
 `;
 
 const ItemFormLayer = ({ item, open, onClose, handleAllergens }) => {
-  // const defaultValue = {
-  //   meat: null,
-  //   noodle: null,
-  //   egg: null,
-  //   spicy: null,
-  //   additional: null,
-  //   sweet: null,
-  //   quantity: null,
-  // };
-
-  // const onCloseReset = () => {
-  //   onClose();
-  //   // getValueFromForm(customValue);
-  // };
-
+  const defaultValue = {};
   const { addToOrder } = useContext(OrderContext);
+  const [value, setValue] = useState(defaultValue);
+
+  const formatObject = (formValue) => {
+    let object = { ...formValue, name: item.names.en };
+    return object;
+  };
 
   return (
     <Box>
@@ -79,10 +71,14 @@ const ItemFormLayer = ({ item, open, onClose, handleAllergens }) => {
             </Box>
             <Box overflow='auto' fill='horizontal'>
               <Form
-                onChange={(value) => console.log('Change', value)}
-                onReset={() => {}}
+                value={value}
+                onChange={(nextValue) => {
+                  console.log('Change', nextValue);
+                  setValue(nextValue);
+                }}
+                onReset={() => setValue(defaultValue)}
                 onSubmit={({ value }) => {
-                  addToOrder(value);
+                  addToOrder(formatObject(value));
                   onClose();
                 }}
               >

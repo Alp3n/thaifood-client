@@ -14,7 +14,7 @@ const OrderList = () => {
 
   return (
     <List
-      data={order.map((item) => item.meat)}
+      data={order.map((item) => `${item.name}, ${item.meat}, ${item.spicy}`)}
       action={(item, index) => {
         return (
           <Button

@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import {
   Box,
   Button,
@@ -16,22 +16,14 @@ import { Close } from 'grommet-icons';
 import { OrderContext } from '../../contexts/OrderContext';
 
 const ItemForm = ({ item, open, onClose, handleAllergens }) => {
-  // const defaultValue = {
-  //   meat: null,
-  //   noodle: null,
-  //   egg: null,
-  //   spicy: null,
-  //   additional: null,
-  //   sweet: null,
-  //   quantity: null,
-  // };
-
   // const onCloseReset = () => {
   //   onClose();
   //   // getValueFromForm(customValue);
   // };
+  const defaultValue = {};
   const size = useContext(ResponsiveContext);
   const { addToOrder } = useContext(OrderContext);
+  const [value, setValue] = useState(defaultValue);
 
   const rowsDesktop = ['xxsmall', 'small', 'xxxsmall', 'medium', 'xsmall'];
   const rowsMobile = [
@@ -105,8 +97,12 @@ const ItemForm = ({ item, open, onClose, handleAllergens }) => {
               </Box>
               <Box gridArea='form' overflow='auto'>
                 <Form
-                  onChange={(value) => console.log('Change', value)}
-                  onReset={() => {}}
+                  value={value}
+                  onChange={(nextValue) => {
+                    console.log('Change', nextValue);
+                    setValue(nextValue);
+                  }}
+                  onReset={() => setValue(defaultValue)}
                   onSubmit={({ value }) => {
                     addToOrder(value);
                     onClose();

@@ -15,7 +15,10 @@ const YourOrderButton = ({ showSidebar, setShowSidebar }) => {
           size='large'
           label='Your order'
           icon={<List />}
-          onClick={() => setShowSidebar(!showSidebar)}
+          onClick={() => {
+            setShowSidebar(!showSidebar);
+            console.log(order);
+          }}
         />
         {order.length > 0 ? (
           <Box
